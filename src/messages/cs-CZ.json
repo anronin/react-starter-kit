@@ -70,5 +70,14 @@
     "files": [
       "src/components/Navigation/Navigation.js"
     ]
+  },
+  {
+    "id": "navigation.reddit",
+    "description": "Reddit link in header",
+    "defaultMessage": "Reddit",
+    "message": "Ředdit",
+    "files": [
+      "src/components/Navigation/Navigation.js"
+    ]
   }
 ]

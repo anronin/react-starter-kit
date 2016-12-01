@@ -25,6 +25,11 @@ const messages = defineMessages({
     defaultMessage: 'Contact',
     description: 'Contact link in header',
   },
+  reddit: {
+    id: 'navigation.reddit',
+    defaultMessage: 'Reddit',
+    description: 'Reddit link in header',
+  },
   login: {
     id: 'navigation.login',
     defaultMessage: 'Log in',
@@ -57,6 +62,9 @@ class Navigation extends React.Component {
         </Link>
         <Link className={s.link} to="/contact">
           <FormattedMessage {...messages.contact} />
+        </Link>
+        <Link className={s.link} to="/reddit">
+          <FormattedMessage {...messages.reddit} />
         </Link>
         <span className={s.spacer}> | </span>
         <Link className={s.link} to="/login">

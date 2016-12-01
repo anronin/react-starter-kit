@@ -17,22 +17,19 @@ export default {
   path: '/',
 
   async action() {
-    const resp = await fetch('/graphql', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: '{news{title,link,publishedDate,contentSnippet}}',
-      }),
-      credentials: 'include',
+    const apiKey = 'dc6zaTOxFJmzC';
+    const path = 'https://api.giphy.com/v1/gifs/random';
+    const tag = 'Cat';
+
+    const resp = await fetch(`${path}?api_key=${apiKey}&tag=${tag}`, {
+      credentials: 'same-origin',
     });
     const { data } = await resp.json();
-    if (!data || !data.news) throw new Error('Failed to load the news feed.');
+
+    if (!data || resp.status !== 200) throw new Error('Failed to load.');
     return {
-      title: 'React Starter Kit',
-      component: <Layout><Home news={data.news} /></Layout>,
+      title: 'React Starter Kit with Giphy Cats',
+      component: <Layout><Home tag={tag} imageUrl={data.image_url} /></Layout>,
     };
   },
 
