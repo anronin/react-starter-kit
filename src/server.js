@@ -59,6 +59,13 @@ app.use(requestLanguage({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use('/translations', (req, res) => {
+  const CONTENT_DIR = path.join(__dirname, './messages');
+  const localPath = path.join(CONTENT_DIR, `${req.cookies.lang}.json`);
+
+  res.sendFile(localPath);
+});
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------

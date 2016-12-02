@@ -7,7 +7,7 @@ class Posts extends React.Component {
       <ul className={s.posts}>
         {this.props.posts.map((post, index) =>
           <li key={index} className={s.postItem}>
-            <span className={s.postTitle}>{post.title}</span>
+            <a className={s.postTitle} href={post.url}>{post.title}</a>
           </li>
         )}
       </ul>

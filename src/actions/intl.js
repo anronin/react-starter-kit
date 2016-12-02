@@ -6,17 +6,8 @@ import {
   SET_LOCALE_ERROR,
 } from '../constants';
 
-const query = `
-  query ($locale:String!) {
-    intl (locale:$locale) {
-      id
-      message
-    }
-  }
-`;
-
 export function setLocale({ locale }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { localeData }) => {
     dispatch({
       type: SET_LOCALE_START,
       payload: {
@@ -25,8 +16,8 @@ export function setLocale({ locale }) {
     });
 
     try {
-      const { data } = await graphqlRequest(query, { locale });
-      const messages = data.intl.reduce((msgs, msg) => {
+      const data = await localeData({ locale });
+      const messages = data.reduce((msgs, msg) => {
         msgs[msg.id] = msg.message; // eslint-disable-line no-param-reassign
         return msgs;
       }, {});

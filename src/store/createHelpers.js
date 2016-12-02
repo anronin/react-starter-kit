@@ -1,5 +1,18 @@
 import fetch from '../core/fetch';
 
+function getLocaleData() {
+  return async function localeData({ locale }) {
+    const fetchConfig = {
+      credentials: 'include',
+    };
+
+    const resp = await fetch(`/translations?lang=${locale}`, fetchConfig);
+
+    if (resp.status !== 200) throw new Error(resp.statusText);
+    return await resp.json();
+  };
+}
+
 function createFetchKnowingCookie({ cookie }) {
   if (!process.env.BROWSER) {
     return (url, options = {}) => {
@@ -24,9 +37,11 @@ function createFetchKnowingCookie({ cookie }) {
 
 export default function createHelpers(config) {
   const fetchKnowingCookie = createFetchKnowingCookie(config);
+  const localeData = getLocaleData();
 
   return {
     fetch: fetchKnowingCookie,
+    localeData,
     history: config.history,
   };
 }
